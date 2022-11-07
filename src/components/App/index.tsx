@@ -43,11 +43,6 @@ const AddToDo = styled.div`
     border: none;
     outline: none !important;
   }
-
-  & > button {
-    border: none;
-    background-color: transparent;
-  }
 `;
 
 function App() {

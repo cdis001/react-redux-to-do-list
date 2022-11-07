@@ -27,8 +27,6 @@ const ToggleCompletedBtn = styled.button`
   height: 25px;
   border: 1px solid #464646;
   border-radius: 50%;
-  background-color: #fff;
-  cursor: pointer;
   position: relative;
 
   &.completed {
@@ -47,11 +45,7 @@ const ToggleCompletedBtn = styled.button`
     font-size: 12px;
   }
 `;
-const DeleteToDoBtn = styled.button`
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-`;
+const DeleteToDoBtn = styled.button``;
 
 function ToDo({ id, contents, completed }) {
   const [isCompleted, setIsCompleted] = useState(completed);
