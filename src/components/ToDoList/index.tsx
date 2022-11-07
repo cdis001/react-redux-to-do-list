@@ -1,5 +1,6 @@
 import react, { useState } from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
 import ToDo from "../ToDo";
 
@@ -11,7 +12,7 @@ const ToDoListBox = styled.ul`
 `;
 
 function ToDoList() {
-  const toDos = [{ id: 1, contents: "hello", completed: false }];
+  const toDos = useSelector((state) => state.toDos) || [];
   return (
     <ToDoListBox>
       {toDos.map((data) => (

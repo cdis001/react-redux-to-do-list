@@ -1,7 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 import ToDoList from "../ToDoList";
+import { addTodo } from "../../reducers/actions";
 
 const AppContainer = styled.div`
   display: flex;
@@ -49,12 +51,26 @@ const AddToDo = styled.div`
 `;
 
 function App() {
+  const [text, setText] = useState("");
+  const dispatch = useDispatch();
+
+  const addTodoToState = (e) => {
+    e.preventDefault();
+    dispatch(addTodo(text));
+    setText("");
+  };
   return (
     <AppContainer>
       <h1>To Do List</h1>
       <AddToDo>
-        <input />
-        <button>⮐</button>
+        <input
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          onKeyUp={(e) => {
+            if (window.event.keyCode === 13) addTodoToState(e);
+          }}
+        />
+        <button onClick={addTodoToState}>⮐</button>
       </AddToDo>
       <ToDoList />
     </AppContainer>

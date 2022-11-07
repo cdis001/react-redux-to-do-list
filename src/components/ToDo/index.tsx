@@ -1,5 +1,8 @@
 import react, { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+
+import { deleteTodo, completeTodo } from "../../reducers/actions";
 
 const ToDoEl = styled.li`
   display: flex;
@@ -51,18 +54,28 @@ const DeleteToDoBtn = styled.button`
 `;
 
 function ToDo({ id, contents, completed }) {
-  //   const [isCompleted, setIsCompleted] = useState(completed);
-  const [isCompleted, setIsCompleted] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(completed);
+  const dispatch = useDispatch();
+
   return (
     <ToDoEl className={`${isCompleted ? "completed" : null}`}>
       <ToggleCompletedBtn
         className={`${isCompleted ? "completed" : null}`}
-        onClick={() => setIsCompleted(!isCompleted)}
+        onClick={() => {
+          dispatch(completeTodo(id));
+          setIsCompleted(!isCompleted);
+        }}
       >
         <span>✔️</span>
       </ToggleCompletedBtn>
       <label>{contents}</label>
-      <DeleteToDoBtn>✕</DeleteToDoBtn>
+      <DeleteToDoBtn
+        onClick={() => {
+          dispatch(deleteTodo(id));
+        }}
+      >
+        ✕
+      </DeleteToDoBtn>
     </ToDoEl>
   );
 }
